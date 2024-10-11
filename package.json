@@ -5,6 +5,10 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
+    "clean": "rm -rf build/",
+    "clean-all": "npm run clean && rm -rf node_modules/ && rm -f package-lock.json",
+    "eslint": "npx eslint . || exit 0",
+    "eslint:fix": "npx eslint --fix . || exit 0",
     "start": "node main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,5 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsdoc": "^50.3.1",
+    "eslint-plugin-n": "^17.11.1",
+    "eslint-plugin-promise": "^7.1.0"
   }
 }
