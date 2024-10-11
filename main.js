@@ -2,10 +2,11 @@
 
 import { cleanExit, fetchData, printJSON, menu } from './src/helpers.js'
 import { calculate } from './src/magic.js'
+import 'dotenv/config'
 
-const TOKEN = process.env["CANVAS_TOKEN"]
-const BASE_URL="https://bth.instructure.com"
-const COURSE_ID = "5905"
+const TOKEN = process.env.CANVAS_TOKEN
+const BASE_URL= process.env.BASE_URL
+const COURSE_ID = process.env.COURSE_ID
 const args = process.argv.slice(2)
 const command = args.length === 0 ? cleanExit(1, "No arguments present") : args[0]
 
