@@ -1,6 +1,6 @@
 #!/usr/env node
 
-import { cleanExit, fetchData, printJSON, menu } from './src/helpers.js'
+import { cleanExit, fetchData, printJSON } from './src/helpers.js'
 import { calculate } from './src/magic.js'
 import 'dotenv/config'
 

@@ -22,14 +22,15 @@ function cleanExit(exitCode = 0, msg) {
 async function fetchData(BASE_URL, COURSE_ID, TOKEN) {
   let counter = 1
   let result = []
-  
-  while (true) {
+  let done = true
+
+  while (done) {
     let GRADEBOOK_URL=`${BASE_URL}/api/v1/courses/${COURSE_ID}/gradebook_history/feed?page=${counter}&per_page=100`  
     let gradebookPage = await((await fetch(GRADEBOOK_URL, {headers: {"Authorization": `Bearer ${TOKEN}`}})).json())
     
     if (gradebookPage.length === 0) {
         console.info(`Complete`)
-        break
+        done = false
     } else {
       result.push(...gradebookPage)
       console.info(`Fetched: ${result.length} grades`)
