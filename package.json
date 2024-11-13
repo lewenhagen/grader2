@@ -10,7 +10,9 @@
     "eslint": "npx eslint . || exit 0",
     "eslint:fix": "npx eslint --fix . || exit 0",
     "start": "node main",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
   },
   "keywords": [],
   "author": "",
@@ -19,11 +21,13 @@
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
+    "@eslint/js": "^9.14.0",
     "eslint": "^8.57.1",
     "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-jsdoc": "^50.3.1",
-    "eslint-plugin-n": "^17.11.1",
-    "eslint-plugin-promise": "^7.1.0"
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsdoc": "^46.3.0",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "globals": "^15.12.0"
   }
 }
