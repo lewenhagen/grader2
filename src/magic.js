@@ -45,8 +45,15 @@ async function generate() {
   result["Total"] = total.Total
   result["Genomströmning"] = total["Genomströmning"]
 
-
-
+  // let output = []
+  // for (const grader in result) {
+  //   output.push(result[grader])
+  // }
+  // output.sort(function(a, b) {
+  //   // console.log(a)
+  //   return a["Total"] - b["Total"]
+  // })
+  // console.log(output)
   return result
 }
 
