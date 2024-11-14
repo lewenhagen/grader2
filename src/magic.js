@@ -45,6 +45,8 @@ async function generate() {
   result["Total"] = total.Total
   result["Genomströmning"] = total["Genomströmning"]
 
+
+
   return result
 }
 
@@ -53,7 +55,7 @@ async function parseData () {
   const json = JSON.parse(jsonString)
 
   for (const grade in json) {
-    if (json[grade].grader !== "Bedömd vid inlämning" && !json[grade].assignment_name.includes("quiz") ) {
+    if (!json[grade].grader.includes("Bedömd vid inlämning") && !json[grade].grader.includes("Umbridge") && !json[grade].assignment_name.includes("quiz") ) {
       finalData.push({
         "grader": json[grade].grader,
         "grade": json[grade].grade,
