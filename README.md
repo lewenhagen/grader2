@@ -19,6 +19,16 @@ Start the grader and see its menu.
 npm start
 ```
 
+Fetch new data.
+```bash
+npm start fetch
+```
+
+Generate table and print it.
+```bash
+npm start magic
+```
+
 
 
 ### Development

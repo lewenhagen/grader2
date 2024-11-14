@@ -2,9 +2,6 @@
 
 import fs from 'fs'
 
-// Manage printed columnnames
-// const formatting = ["Kmom01", "Kmom02", "Kmom03", "Kmom04", "Kmom05", "Kmom06", "Total", "%", "G", "%G"]
-
 let finalData = []
 let assignments = []
 
@@ -24,6 +21,7 @@ async function generate() {
     let kmom = item.kmom
     let grade = item.grade
     let grader = item.grader
+
     // For Teacher
     kmom in result[grader] ? result[grader][kmom]++ : result[grader][kmom] = 1
     grade in result[grader] ? result[grader][grade]++ : result[grader][grade] = 1
