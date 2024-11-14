@@ -1,4 +1,5 @@
 *.json
-data/*
+data/*.json
+data/*.data
 node_modules
 .env.local
