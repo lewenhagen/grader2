@@ -1,7 +1,6 @@
 #!/usr/env node
 
-import { cleanExit, fetchData, printJSON, parseData, magic } from './src/magic.js'
-// import { calculate } from './src/magic.js.old'
+import { cleanExit, fetchData, printJSON, magic } from './src/magic.js'
 import 'dotenv/config'
 
 const TOKEN = process.env.CANVAS_TOKEN
@@ -17,9 +16,6 @@ async function main () {
       break
     case 'print':
       printJSON()
-      break
-    case 'parse':
-      await parseData()
       break
     case 'magic':
       await magic()

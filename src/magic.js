@@ -106,7 +106,6 @@ async function fetchData (BASE_URL, COURSE_ID, TOKEN) {
     counter++
   }
   fs.writeFileSync('./data/gradebook.json', JSON.stringify(result))
-  // parseData()
 }
 
 function printJSON () {
