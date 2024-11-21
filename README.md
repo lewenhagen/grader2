@@ -13,6 +13,12 @@ CANVAS_TOKEN="123123..."
 
 ### Usage
 
+Install npm packages, it's a JavaScript project so of course we need packages.
+
+```bash
+npm install
+```
+
 Start the grader and see its menu.
 
 ```bash
