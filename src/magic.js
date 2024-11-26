@@ -57,6 +57,13 @@ async function generate() {
   return result
 }
 
+function endComparator(a,b) {
+  if (a.slice(-1) < b.slice(-1)) return -1;
+  if (a.slice(-1) > b.slice(-1)) return 1;
+  return 0;
+}
+
+
 async function parseData () {
   const jsonString = fs.readFileSync('./data/gradebook.json', 'utf8')
   const json = JSON.parse(jsonString)
@@ -72,6 +79,8 @@ async function parseData () {
   }
 
   assignments = [...new Set(finalData.map(item => item.kmom))]
+  assignments.sort(endComparator)
+  console.log(assignments)
 }
 
 
