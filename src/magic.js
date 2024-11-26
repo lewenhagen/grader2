@@ -80,7 +80,6 @@ async function parseData () {
 
   assignments = [...new Set(finalData.map(item => item.kmom))]
   assignments.sort(endComparator)
-  console.log(assignments)
 }
 
 
