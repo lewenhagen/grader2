@@ -4,6 +4,7 @@ import fs from 'fs'
 
 let finalData = []
 let assignments = []
+let latestGrades = {}
 
 async function generate() {
   let result = {}
@@ -27,6 +28,7 @@ async function generate() {
     grade in result[grader] ? result[grader][grade]++ : result[grader][grade] = 1
     "Total" in result[grader] ? result[grader].Total++ : result[grader].Total = 1
 
+
     // For Extra
     kmom in total.Total ? total.Total[kmom]++ : total.Total[kmom] = 1
     kmom in total["Genomströmning"] ? total["Genomströmning"][kmom] = Math.round((total.Total[kmom] / total.Total["Kmom01"])*100) + "%" : total["Genomströmning"][kmom] = 0
@@ -37,6 +39,8 @@ async function generate() {
       result[item]["%G"] = Math.round((result[item]["G"] / result[item].Total)*100) + "%"
       total.Total["G"] += result[item]["G"]
       total.Total["%G"] = Math.round((total.Total["G"] / total.Total.Total)*100) + "%"
+      result[item]["Senast"] = latestGrades[item].toLocaleString("sv-SE")
+
   }
 
   total.Total["%"] = "100%"
@@ -45,15 +49,6 @@ async function generate() {
   result["Total"] = total.Total
   result["Genomströmning"] = total["Genomströmning"]
 
-  // let output = []
-  // for (const grader in result) {
-  //   output.push(result[grader])
-  // }
-  // output.sort(function(a, b) {
-  //   // console.log(a)
-  //   return a["Total"] - b["Total"]
-  // })
-  // console.log(output)
   return result
 }
 
@@ -75,6 +70,12 @@ async function parseData () {
         "grade": json[grade].grade,
         "kmom": json[grade].assignment_name
       })
+
+      if (latestGrades[json[grade].grader] === undefined) {
+        latestGrades[json[grade].grader] = new Date(json[grade].current_graded_at)
+      } else {
+        latestGrades[json[grade].grader] = new Date(json[grade].current_graded_at) > new Date(latestGrades[json[grade].grader]) ? new Date(json[grade].current_graded_at) : new Date(latestGrades[json[grade].grader])
+      }
     }
   }
 
@@ -145,7 +146,7 @@ async function magic() {
 
   sortedObject["Total"] = temp_total
   sortedObject["Genomströmning"] = temp_genom
-  console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G"]))
+  console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G", "Senast"]))
 }
 
 export {
