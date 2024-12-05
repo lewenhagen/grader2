@@ -35,6 +35,11 @@ Generate table and print it.
 npm start magic
 ```
 
+Generate table and print it with the latest grade time.
+```bash
+npm start magic time
+```
+
 
 
 ### Development

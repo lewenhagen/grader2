@@ -132,7 +132,7 @@ function printJSON () {
 
 
 
-async function magic() {
+async function magic(extra) {
   await parseData()
   let result = await generate()
   let sortedObject = Object.fromEntries(
@@ -146,7 +146,13 @@ async function magic() {
 
   sortedObject["Total"] = temp_total
   sortedObject["Genomströmning"] = temp_genom
-  console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G", "Senast"]))
+  if (extra === "time") {
+    console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G", "Senast"]))
+
+  } else {
+  console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G"]))
+
+  }
 }
 
 export {

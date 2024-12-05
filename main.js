@@ -8,6 +8,7 @@ const BASE_URL = process.env.BASE_URL
 const COURSE_ID = process.env.COURSE_ID
 const args = process.argv.slice(2)
 const command = args.length === 0 ? cleanExit(1, 'No arguments present') : args[0]
+const extra = args.length === 2 ? args[1] : null
 
 async function main () {
   switch (command) {
@@ -18,7 +19,7 @@ async function main () {
       printJSON()
       break
     case 'magic':
-      await magic()
+      await magic(extra)
       break
     default:
       cleanExit(1, 'Wrong argument provided.')
