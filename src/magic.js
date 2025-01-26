@@ -65,6 +65,7 @@ async function parseData () {
 
   for (const grade in json) {
     if (!json[grade].grader.includes("Bedömd vid inlämning") && !json[grade].grader.includes("Umbridge") && !json[grade].assignment_name.includes("quiz") ) {
+      // console.log(json[grade])
       finalData.push({
         "grader": json[grade].grader,
         "grade": json[grade].grade,
