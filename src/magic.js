@@ -89,12 +89,13 @@ async function parseData () {
 
 function menu () {
   console.log(`
-    This is the Grader script, this time in JS!
+    This is the Grader 2.0 script, this time in JS!
+    Run scripts with "npm start <command>"
     -------------------------------------------
     Command        Description
     -------------------------------------------
     fetch          Fetches new data from Canvas
-    print          Prints the gradebook in JSON
+    json          Prints the gradebook in JSON
     magic          Parse the data and print table
     `)
 }

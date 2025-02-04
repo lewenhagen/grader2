@@ -15,7 +15,7 @@ async function main () {
     case 'fetch':
       await fetchData(BASE_URL, COURSE_ID, TOKEN)
       break
-    case 'print':
+    case 'json':
       printJSON()
       break
     case 'magic':
