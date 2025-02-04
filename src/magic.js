@@ -2,13 +2,13 @@
 
 import fs from 'fs'
 
-let finalData = []
+const finalData = []
 let assignments = []
-let latestGrades = {}
+const latestGrades = {}
 
 async function generate() {
-  let result = {}
-  let total = {}
+  const result = {}
+  const total = {}
   total.Total = {}
   total["Genomströmning"] = {}
   total.Total["G"] = 0
@@ -19,9 +19,9 @@ async function generate() {
 
     total.Total.Total ++
     if (!(item.grader in result)) result[item.grader] = {}
-    let kmom = item.kmom
-    let grade = item.grade
-    let grader = item.grader
+    const kmom = item.kmom
+    const grade = item.grade
+    const grader = item.grader
 
     // For Teacher
     kmom in result[grader] ? result[grader][kmom]++ : result[grader][kmom] = 1
@@ -34,7 +34,7 @@ async function generate() {
     kmom in total["Genomströmning"] ? total["Genomströmning"][kmom] = Math.round((total.Total[kmom] / total.Total["Kmom01"])*100) + "%" : total["Genomströmning"][kmom] = 0
   }
 
-  for (let item in result) {
+  for (const item in result) {
       result[item]["%"] = Math.round((result[item].Total / total.Total.Total)*100) + "%"
       result[item]["%G"] = Math.round((result[item]["G"] / result[item].Total)*100) + "%"
       total.Total["G"] += result[item]["G"]
@@ -136,12 +136,12 @@ function printJSON () {
 
 async function magic(extra) {
   await parseData()
-  let result = await generate()
-  let sortedObject = Object.fromEntries(
+  const result = await generate()
+  const sortedObject = Object.fromEntries(
       Object.entries(result).sort(([, a], [, b]) => b["Total"] - a["Total"])
   )
-  let temp_total = sortedObject["Total"]
-  let temp_genom = sortedObject["Genomströmning"]
+  const temp_total = sortedObject["Total"]
+  const temp_genom = sortedObject["Genomströmning"]
 
   delete sortedObject["Total"]
   delete sortedObject["Genomströmning"]
