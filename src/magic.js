@@ -10,7 +10,7 @@ async function generate() {
   const result = {}
   const total = {}
   total.Total = {}
-  total["Genomströmning"] = {}
+  // total["Genomströmning"] = {}
   total.Total["G"] = 0
   total.Total.Total = 0
 
@@ -31,7 +31,7 @@ async function generate() {
 
     // For Extra
     kmom in total.Total ? total.Total[kmom]++ : total.Total[kmom] = 1
-    kmom in total["Genomströmning"] ? total["Genomströmning"][kmom] = Math.round((total.Total[kmom] / total.Total["Kmom01"])*100) + "%" : total["Genomströmning"][kmom] = 0
+    // kmom in total["Genomströmning"] ? total["Genomströmning"][kmom] = Math.round((total.Total[kmom] / total.Total["Kmom01"])*100) + "%" : total["Genomströmning"][kmom] = 0
   }
 
   for (const item in result) {
@@ -47,16 +47,11 @@ async function generate() {
 
   result["----------"] = {}
   result["Total"] = total.Total
-  result["Genomströmning"] = total["Genomströmning"]
+  // result["Genomströmning"] = total["Genomströmning"]
 
   return result
 }
 
-function endComparator(a,b) {
-  if (a.slice(-1) < b.slice(-1)) return -1;
-  if (a.slice(-1) > b.slice(-1)) return 1;
-  return 0;
-}
 
 
 async function parseData () {
@@ -81,9 +76,12 @@ async function parseData () {
   }
 
   assignments = [...new Set(finalData.map(item => item.kmom))]
-  assignments.sort(endComparator)
-}
+  assignments.sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
 
+  if (assignments.at(-1).includes("Tentamen")) {
+    assignments.splice(assignments.length - 2, 0, assignments.pop())
+  }
+}
 
 
 
@@ -141,13 +139,15 @@ async function magic(extra) {
       Object.entries(result).sort(([, a], [, b]) => b["Total"] - a["Total"])
   )
   const temp_total = sortedObject["Total"]
-  const temp_genom = sortedObject["Genomströmning"]
+  // const temp_genom = sortedObject["Genomströmning"]
 
   delete sortedObject["Total"]
-  delete sortedObject["Genomströmning"]
+  // delete sortedObject["Genomströmning"]
 
   sortedObject["Total"] = temp_total
-  sortedObject["Genomströmning"] = temp_genom
+  
+  // sortedObject["Genomströmning"] = temp_genom
+
   if (extra === "time") {
     console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G", "Senast"]))
 
