@@ -158,11 +158,27 @@ async function magic(extra) {
   }
 }
 
+async function getCount(name, date) {
+  await parseData()
+  
+
+
+  for (const item of finalData) {
+    if (item.grade === null) continue
+    // console.log(item.grader)
+    if (item.grader.indexOf(name) > -1) {
+      console.log(item)
+    }
+    
+  }
+}
+
 export {
   cleanExit,
   fetchData,
   printJSON,
   menu,
   parseData,
-  magic
+  magic,
+  getCount
 }

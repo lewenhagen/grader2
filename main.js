@@ -1,6 +1,6 @@
 #!/usr/env node
 
-import { cleanExit, fetchData, printJSON, magic } from './src/magic.js'
+import { cleanExit, fetchData, printJSON, magic, getCount } from './src/magic.js'
 import 'dotenv/config'
 
 const TOKEN = process.env.CANVAS_TOKEN
@@ -20,6 +20,9 @@ async function main () {
       break
     case 'magic':
       await magic(extra)
+      break
+    case 'count':
+      await getCount(args[1], args[2])
       break
     default:
       cleanExit(1, 'Wrong argument provided.')
