@@ -106,7 +106,7 @@ function cleanExit (exitCode = 0, msg) {
   process.exit(exitCode)
 }
 
-async function fetchData (BASE_URL, COURSE_ID, TOKEN) {
+async function fetchData (BASE_URL, COURSE_ID, TOKEN, silent) {
   let counter = 1
   const result = []
   let done = false
@@ -120,7 +120,9 @@ async function fetchData (BASE_URL, COURSE_ID, TOKEN) {
       done = true
     } else {
       result.push(...gradebookPage)
-      console.info(`Fetched: ${result.length} grades`)
+      if (!silent) {
+        console.info(`Fetched: ${result.length} grades`)
+      }
     }
     counter++
   }

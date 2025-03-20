@@ -11,9 +11,11 @@ const command = args.length === 0 ? cleanExit(1, 'No arguments present') : args[
 const extra = args.length === 2 ? args[1] : null
 
 async function main () {
+  let silent = args[1] == "silent" ? true : false
+
   switch (command) {
     case 'fetch':
-      await fetchData(BASE_URL, COURSE_ID, TOKEN)
+      await fetchData(BASE_URL, COURSE_ID, TOKEN, silent)
       break
     case 'json':
       printJSON()
