@@ -5,6 +5,7 @@ import fs from 'fs'
 const finalData = []
 let assignments = []
 const latestGrades = {}
+let json = {}
 
 async function generate() {
   const result = {}
@@ -56,7 +57,7 @@ async function generate() {
 
 async function parseData () {
   const jsonString = fs.readFileSync('./data/gradebook.json', 'utf8')
-  const json = JSON.parse(jsonString)
+  json = JSON.parse(jsonString)
 
   for (const grade in json) {
     // console.log(json[grade].grade)
@@ -94,8 +95,9 @@ function menu () {
     Command        Description
     -------------------------------------------
     fetch          Fetches new data from Canvas
-    json          Prints the gradebook in JSON
+    json           Prints the gradebook in JSON
     magic          Parse the data and print table
+    count <name>   Prints Date and count of <name>
     `)
 }
 function cleanExit (exitCode = 0, msg) {
@@ -146,7 +148,7 @@ async function magic(extra) {
   // delete sortedObject["Genomströmning"]
 
   sortedObject["Total"] = temp_total
-  
+
   // sortedObject["Genomströmning"] = temp_genom
 
   if (extra === "time") {
@@ -158,19 +160,34 @@ async function magic(extra) {
   }
 }
 
-async function getCount(name, date) {
+async function getCount(name) {
   await parseData()
-  
+  let result = {}
+  let sortedCount = []
 
+  for (const item of json) {
+    // if (item.grade === null) continue
+    if (!item.grader.includes("Bedömd vid inlämning") && !item.grader.includes("Umbridge") && !item.assignment_name.includes("quiz") && item.grade !== "U") {
 
-  for (const item of finalData) {
-    if (item.grade === null) continue
-    // console.log(item.grader)
-    if (item.grader.indexOf(name) > -1) {
-      console.log(item)
+      if (item.grader.toLowerCase().indexOf(name) > -1) {
+        let theDate = new Date(item.graded_at).toLocaleDateString("sv-SE")
+        result[theDate] = result[theDate] == undefined ? 1 : result[theDate]+1
+      }
     }
-    
   }
+
+
+  const sortedEntries = Object.entries(result).sort(([dateA], [dateB]) =>
+      new Date(dateA) - new Date(dateB)
+  )
+  sortedCount = Object.fromEntries(sortedEntries)
+
+
+  let total = Object.values(sortedCount).reduce((a, b) => a + b, 0)
+  sortedCount["--------"] = "-------------------"
+  sortedCount.Total = total
+
+  console.table(sortedCount)
 }
 
 export {
