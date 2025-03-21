@@ -95,6 +95,7 @@ function menu () {
     Command        Description
     -------------------------------------------
     fetch          Fetches new data from Canvas
+    fetch silent   Fetches new data from Canvas, but silently
     json           Prints the gradebook in JSON
     magic          Parse the data and print table
     count <name>   Prints Date and count of <name>
