@@ -166,7 +166,7 @@ async function getCount(name) {
   await parseData()
   let result = {}
   let sortedCount = []
-
+  let names = {}
   for (const item of json) {
     // if (item.grade === null) continue
     if (!item.grader.includes("Bedömd vid inlämning") && !item.grader.includes("Umbridge") && !item.assignment_name.includes("quiz") && item.grade !== "U") {
@@ -174,6 +174,7 @@ async function getCount(name) {
       if (item.grader.toLowerCase().indexOf(name) > -1) {
         let theDate = new Date(item.graded_at).toLocaleDateString("sv-SE")
         result[theDate] = result[theDate] == undefined ? 1 : result[theDate]+1
+        names[item.grader] = names[item.grader] == undefined ? 1 : names[item.grader]+1
       }
     }
   }
@@ -183,13 +184,9 @@ async function getCount(name) {
       new Date(dateA) - new Date(dateB)
   )
   sortedCount = Object.fromEntries(sortedEntries)
-
-
-  let total = Object.values(sortedCount).reduce((a, b) => a + b, 0)
-  sortedCount["--------"] = "-------------------"
-  sortedCount.Total = total
-
+  
   console.table(sortedCount)
+  console.table(names)
 }
 
 export {
