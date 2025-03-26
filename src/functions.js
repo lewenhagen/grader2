@@ -2,6 +2,7 @@
 
 import fs from 'fs'
 
+const gradebookPath = "./data/gradebook.json"
 const finalData = []
 let assignments = []
 const latestGrades = {}
@@ -56,7 +57,7 @@ async function generate() {
 
 
 async function parseData () {
-  const jsonString = fs.readFileSync('./data/gradebook.json', 'utf8')
+  const jsonString = fs.readFileSync(gradebookPath, 'utf8')
   json = JSON.parse(jsonString)
 
   for (const grade in json) {
@@ -87,26 +88,6 @@ async function parseData () {
 
 
 
-function menu () {
-  console.log(`
-    This is the Grader 2.0 script, this time in JS!
-    Run scripts with "npm start <command>"
-    -------------------------------------------
-    Command        Description
-    -------------------------------------------
-    fetch          Fetches new data from Canvas
-    fetch silent   Fetches new data from Canvas, but silently
-    json           Prints the gradebook in JSON
-    magic          Parse the data and print table
-    count <name>   Prints Date and count of <name>
-    `)
-}
-function cleanExit (exitCode = 0, msg) {
-  console.info(`Message: ${msg}`)
-  menu()
-  process.exit(exitCode)
-}
-
 async function fetchData (BASE_URL, COURSE_ID, TOKEN, silent) {
   let counter = 1
   const result = []
@@ -127,18 +108,19 @@ async function fetchData (BASE_URL, COURSE_ID, TOKEN, silent) {
     }
     counter++
   }
-  fs.writeFileSync('./data/gradebook.json', JSON.stringify(result))
+  fs.writeFileSync(gradebookPath, JSON.stringify(result))
 }
 
 function printJSON () {
-  const jsonString = fs.readFileSync('./data/gradebook.json', 'utf8')
+  const jsonString = fs.readFileSync(gradebookPath, 'utf8')
   const json = JSON.parse(jsonString)
   console.log(json)
 }
 
 
 
-async function magic(extra) {
+async function printResult(options) {
+  console.log(options)
   await parseData()
   const result = await generate()
   const sortedObject = Object.fromEntries(
@@ -154,7 +136,7 @@ async function magic(extra) {
 
   // sortedObject["Genomströmning"] = temp_genom
 
-  if (extra === "time") {
+  if (options.time) {
     console.table(sortedObject, assignments.concat(["Total", "%", "G", "%G", "Senast"]))
 
   } else {
@@ -191,11 +173,8 @@ async function getCount(name) {
 }
 
 export {
-  cleanExit,
   fetchData,
   printJSON,
-  menu,
-  parseData,
-  magic,
+  printResult,
   getCount
 }

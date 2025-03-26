@@ -2,11 +2,16 @@
 
 ### Setup
 
-Create a file `.env.local` and add your token and the id of the Canvas course to it.
+Create a file `.env.local` and add your token and the id of the Canvas course to it. Copy the .env file:
+
+```console
+$ cp .env .env.local
+```
 
 ```env
-COURSE_ID=59505
-CANVAS_TOKEN="123123..."
+BASE_URL="https://bth.instructure.com"
+COURSE_ID=<id>
+CANVAS_TOKEN="<token>"
 ```
 
 
@@ -22,24 +27,18 @@ npm install
 Start the grader and see its menu.
 
 ```bash
-npm start
+node main.js
 ```
 
 Fetch new data.
 ```bash
-npm start fetch
+node main.js fetch
 ```
 
 Generate table and print it.
 ```bash
-npm start magic
+node main.js magic
 ```
-
-Generate table and print it with the latest grade time.
-```bash
-npm start magic time
-```
-
 
 
 ### Development

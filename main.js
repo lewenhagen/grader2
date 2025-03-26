@@ -1,35 +1,23 @@
 #!/usr/env node
 
-import { cleanExit, fetchData, printJSON, magic, getCount } from './src/magic.js'
-import 'dotenv/config'
+import { Command } from 'commander'
+import fetch from './commands/fetch.js'
+import magic from './commands/magic.js'
+import json from './commands/json.js'
+import count from './commands/count.js'
 
-const TOKEN = process.env.CANVAS_TOKEN
-const BASE_URL = process.env.BASE_URL
-const COURSE_ID = process.env.COURSE_ID
-const args = process.argv.slice(2)
-const command = args.length === 0 ? cleanExit(1, 'No arguments present') : args[0]
-const extra = args.length === 2 ? args[1] : null
+const program = new Command()
 
-async function main () {
-  let silent = args[1] == "silent" ? true : false
+program 
+  .name('main.js')
+  .usage('<command> <option>')
+  .description('CLI to followup grading in courses')
+  .version('2.0.0')
 
-  switch (command) {
-    case 'fetch':
-      await fetchData(BASE_URL, COURSE_ID, TOKEN, silent)
-      break
-    case 'json':
-      printJSON()
-      break
-    case 'magic':
-      await magic(extra)
-      break
-    case 'count':
-      await getCount(args[1], args[2])
-      break
-    default:
-      cleanExit(1, 'Wrong argument provided.')
-      break
-  }
-}
+program.addCommand(fetch)
+program.addCommand(magic)
+program.addCommand(json)
+program.addCommand(count)
 
-await main()
+program.parse(process.argv)
+
