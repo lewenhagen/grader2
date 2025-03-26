@@ -120,7 +120,6 @@ function printJSON () {
 
 
 async function printResult(options) {
-  console.log(options)
   await parseData()
   const result = await generate()
   const sortedObject = Object.fromEntries(
