@@ -20,32 +20,38 @@ CANVAS_TOKEN="<token>"
 
 Install npm packages, it's a JavaScript project so of course we need packages.
 
-```bash
-npm install
+```console
+$ npm install
 ```
 
 Start the grader and see its menu.
 
-```bash
-node main.js
+```console
+$ node main.js help
+Usage: main.js <command> <option>
+
+CLI to followup grading in courses
+
+Options:
+  -V, --version                                                output the version number
+  -h, --help                                                   display help for command
+
+Commands:
+  fetch [options]                                              Fetches new data from Canvas
+  magic [options]                                              Prints the magic table
+  json                                                         Prints the raw JSON object
+  count <string>                                               Counts the gradings and prints date for grader
+  stat [options] <(section) <string>> <(assignment) <string>>  Counts submissions for <section> <kmom>
+  help [command]                                               display help for command
 ```
 
-Fetch new data.
-```bash
-node main.js fetch
-```
-
-Generate table and print it.
-```bash
-node main.js magic
-```
 
 
 ### Development
 
 Run the linter and the fixer.
 
-```bash
+```console
 npm run eslint
 npm run eslint:fix
 ```
