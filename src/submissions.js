@@ -110,7 +110,7 @@ Assignments: ${assignments.map((item) => item.name)}`)
         for (const assignment of assignments) {
             if (assignment.name.toLowerCase().includes(assignmentSubstring.toLowerCase())) {
                 const submissions = await getSubmissions(baseUrl, sectionId, assignment.id, apiToken)
-                !options.silent && console.log(`Got a total of ${submissions.length} submissions (all sections) for assignment: ${assignment.id} (${assignment.name})`)
+                !options.silent && console.log(`Got a total of ${submissions.length} submissions for assignment: ${assignment.id} (${assignment.name})`)
                 submissions.forEach(submission => {
                     if (studentIds.has(submission.user_id)) {
                         if (["graded", "submitted"].includes(submission.workflow_state)) {
