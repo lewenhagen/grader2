@@ -6,6 +6,7 @@ import magic from './commands/magic.js'
 import json from './commands/json.js'
 import count from './commands/count.js'
 import stat from './commands/stat.js'
+import info from './commands/info.js'
 
 const program = new Command()
 
@@ -20,5 +21,6 @@ program.addCommand(magic)
 program.addCommand(json)
 program.addCommand(count)
 program.addCommand(stat)
+program.addCommand(info)
 
 program.parse(process.argv)

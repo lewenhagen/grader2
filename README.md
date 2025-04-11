@@ -1,5 +1,8 @@
 # Grader 2
 
+### TODO
+* get enrolled acronyms for section
+
 ### Setup
 
 Create a file `.env.local` and add your token and the id of the Canvas course to it. Copy the .env file:

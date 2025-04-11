@@ -3,3 +3,4 @@ data/*.json
 data/*.data
 node_modules
 .env.local
+output/*.json
